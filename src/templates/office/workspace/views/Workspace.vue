@@ -22,13 +22,34 @@
             :h="item.h"
             :i="item.i"
             :static="item.static">
-            <div class="content_wrap" @click="putGridItem(item.i)">
+            <div class="content_wrap" @click="showModalItemDetail(item)">
               <span class="bg_white">{{ item.name }}</span>
             </div>
           </grid-item>
         </div>
       </grid-layout>
 
+      <!-- Modal -->
+      <sui-modal v-model="modalInit">
+        <sui-modal-header>자리 상세</sui-modal-header>
+        <sui-modal-content>
+          <sui-form>
+            <sui-form-field>
+              <label>이름</label>
+              <input v-model="selectedItem.name">
+            </sui-form-field>
+            <sui-form-field>
+              <label>배경색</label>
+              <input v-model="selectedItem.color">
+            </sui-form-field>
+          </sui-form>
+        </sui-modal-content>
+        <sui-modal-actions>
+          <sui-button @click="updateItem">
+            수정
+          </sui-button>
+        </sui-modal-actions>
+      </sui-modal>
     </div>
 </template>
 
@@ -44,9 +65,11 @@ export default {
 	filters: {},
 	data () {
     return {
+      modalInit: false,
+      selectedItem: {},
       gridItems: [
         {
-          x: 4,
+          x: 10,
           y: 0,
           w: 8,
           h: 4,
@@ -56,7 +79,7 @@ export default {
           color: 'bg_green'
         },
         {
-          x: 4,
+          x: 10,
           y: 4,
           w: 4,
           h: 4,
@@ -66,7 +89,7 @@ export default {
           color: 'bg_blue'
         },
         {
-          x: 4,
+          x: 10,
           y: 8,
           w: 4,
           h: 4,
@@ -76,7 +99,7 @@ export default {
           color: 'bg_blue'
         },
         {
-          x: 8,
+          x: 14,
           y: 4,
           w: 4,
           h: 4,
@@ -86,7 +109,7 @@ export default {
           color: 'bg_yellow'
         },
         {
-          x: 4,
+          x: 10,
           y: 12,
           w: 4,
           h: 4,
@@ -96,7 +119,7 @@ export default {
           color: 'bg_yellow'
         },
         {
-          x: 8,
+          x: 14,
           y: 8,
           w: 4,
           h: 4,
@@ -125,24 +148,28 @@ export default {
     },
     generateColor () {
       let color = [
-        'bg_white',
         'bg_red',
         'bg_orange',
         'bg_yellow',
         'bg_green',
         'bg_blue',
-        'bg_black',
         'bg_purple',
         'bg_cyan'
       ]
       return color[this.getRandomInt(0, color.length + 1)]
     },
-    putGridItem (itemId) {
-      console.log(itemId)
-      let _item = this.gridItems.filter((item) => {
-        return item.i === itemId
-      })[0].color = 'bg_green'
-      console.log(_item)
+    showModalItemDetail (item) {
+      this.modalInit = true
+      this.selectedItem = item
+      console.log(this.selectedItem)
+    },
+    updateItem () {
+      this.gridItems.filter(item => {
+        if (item.i === this.selectedItem.i) {
+          item = this.selectedItem
+        }
+      })
+      this.modalInit = false
     },
     gridCreate () {
       this.gridItems.push({
