@@ -46,34 +46,64 @@ export default {
     return {
       gridItems: [
         {
-          x: 0,
-          y: 0,
-          w: 4,
-          h: 4,
-          name: '이환웅',
-          i: '0',
-          static: true,
-          color: 'bg_orange'
-        },
-        {
           x: 4,
           y: 0,
-          w: 4,
+          w: 8,
           h: 4,
-          name: '홍길동',
-          i: '1',
+          name: '강권영',
+          i: ((Math.random() * 100000).toFixed(0)).toString(),
           static: true,
           color: 'bg_green'
         },
         {
-          x: 8,
-          y: 0,
+          x: 4,
+          y: 4,
           w: 4,
           h: 4,
-          name: 'Louis Vuitton',
-          i: '3',
+          name: '서승원',
+          i: ((Math.random() * 100000).toFixed(0)).toString(),
           static: true,
           color: 'bg_blue'
+        },
+        {
+          x: 4,
+          y: 8,
+          w: 4,
+          h: 4,
+          name: '박민영',
+          i: ((Math.random() * 100000).toFixed(0)).toString(),
+          static: true,
+          color: 'bg_blue'
+        },
+        {
+          x: 8,
+          y: 4,
+          w: 4,
+          h: 4,
+          name: '안수열',
+          i: ((Math.random() * 100000).toFixed(0)).toString(),
+          static: true,
+          color: 'bg_yellow'
+        },
+        {
+          x: 4,
+          y: 12,
+          w: 4,
+          h: 4,
+          name: '이환웅',
+          i: ((Math.random() * 100000).toFixed(0)).toString(),
+          static: true,
+          color: 'bg_yellow'
+        },
+        {
+          x: 8,
+          y: 8,
+          w: 4,
+          h: 4,
+          name: '이준희',
+          i: ((Math.random() * 100000).toFixed(0)).toString(),
+          static: true,
+          color: 'bg_orange'
         },
       ],
     }
@@ -93,6 +123,20 @@ export default {
       var name = this.capFirst(name1[this.getRandomInt(0, name1.length + 1)]) + ' ' + this.capFirst(name2[this.getRandomInt(0, name2.length + 1)])
       return name
     },
+    generateColor () {
+      let color = [
+        'bg_white',
+        'bg_red',
+        'bg_orange',
+        'bg_yellow',
+        'bg_green',
+        'bg_blue',
+        'bg_black',
+        'bg_purple',
+        'bg_cyan'
+      ]
+      return color[this.getRandomInt(0, color.length + 1)]
+    },
     putGridItem (itemId) {
       console.log(itemId)
       let _item = this.gridItems.filter((item) => {
@@ -108,7 +152,7 @@ export default {
         h: 4,
         name: this.generateName(),
         static: true,
-        color: 'bg_orange',
+        color: this.generateColor(),
         i: ((Math.random() * 100000).toFixed(0)).toString(),
       })
     }
