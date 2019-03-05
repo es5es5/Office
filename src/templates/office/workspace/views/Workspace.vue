@@ -42,6 +42,16 @@
               <label>배경색</label>
               <input v-model="selectedItem.color">
             </sui-form-field>
+            <sui-form-field>
+              <label>직급</label>
+              <el-radio-group v-model="selectedItem.grade">
+                <el-radio :label="'0'">상무</el-radio>
+                <el-radio :label="'1'">팀장</el-radio>
+                <el-radio :label="'2'">과장</el-radio>
+                <el-radio :label="'3'">대리</el-radio>
+                <el-radio :label="'4'">사원</el-radio>
+              </el-radio-group>
+            </sui-form-field>
           </sui-form>
         </sui-modal-content>
         <sui-modal-actions>
@@ -68,6 +78,16 @@ export default {
 	filters: {},
 	data () {
     return {
+      color: [
+        // 'bg_red',
+        'bg_pink',
+        'bg_yellow',
+        // 'bg_blue',
+        // 'bg_purple',
+        'bg_cyan',
+        'bg_green',
+        'bg_orange',
+      ],
       modalInit: false,
       selectedItem: {},
       gridItems: [
@@ -77,9 +97,10 @@ export default {
           w: 8,
           h: 4,
           name: '강권영',
+          grade: '0',
           i: ((Math.random() * 100000).toFixed(0)).toString(),
           static: true,
-          color: 'bg_green'
+          color: 'bg_pink'
         },
         {
           x: 10,
@@ -87,9 +108,10 @@ export default {
           w: 4,
           h: 4,
           name: '서승원',
+          grade: '3',
           i: ((Math.random() * 100000).toFixed(0)).toString(),
           static: true,
-          color: 'bg_blue'
+          color: 'bg_green'
         },
         {
           x: 10,
@@ -97,9 +119,10 @@ export default {
           w: 4,
           h: 4,
           name: '박민영',
+          grade: '2',
           i: ((Math.random() * 100000).toFixed(0)).toString(),
           static: true,
-          color: 'bg_blue'
+          color: 'bg_cyan'
         },
         {
           x: 14,
@@ -107,6 +130,7 @@ export default {
           w: 4,
           h: 4,
           name: '안수열',
+          grade: '1',
           i: ((Math.random() * 100000).toFixed(0)).toString(),
           static: true,
           color: 'bg_yellow'
@@ -117,9 +141,10 @@ export default {
           w: 4,
           h: 4,
           name: '이환웅',
+          grade: '4',
           i: ((Math.random() * 100000).toFixed(0)).toString(),
           static: true,
-          color: 'bg_yellow'
+          color: 'bg_orange'
         },
         {
           x: 14,
@@ -127,9 +152,10 @@ export default {
           w: 4,
           h: 4,
           name: '이준희',
+          grade: '3',
           i: ((Math.random() * 100000).toFixed(0)).toString(),
           static: true,
-          color: 'bg_orange'
+          color: 'bg_green'
         },
       ],
     }
@@ -151,25 +177,26 @@ export default {
     },
     generateColor () {
       let color = [
-        'bg_red',
-        'bg_orange',
+        // 'bg_red',
+        'bg_pink',
         'bg_yellow',
+        // 'bg_blue',
+        // 'bg_purple',
+        'bg_cyan',
         'bg_green',
-        'bg_blue',
-        'bg_purple',
-        'bg_cyan'
+        'bg_orange',
       ]
       return color[this.getRandomInt(0, color.length + 1)]
     },
     showModalItemDetail (item) {
       this.modalInit = true
       this.selectedItem = item
-      console.log(this.selectedItem)
     },
     updateItem () {
       this.gridItems.filter(item => {
         if (item.i === this.selectedItem.i) {
           item = this.selectedItem
+          item.color = this.color[parseInt(this.selectedItem.grade)]
         }
       })
       this.modalInit = false
@@ -189,8 +216,9 @@ export default {
         w: 4,
         h: 4,
         name: this.generateName(),
+        grade: '4',
         static: true,
-        color: this.generateColor(),
+        color: this.color[4],
         i: ((Math.random() * 100000).toFixed(0)).toString(),
       })
     }
