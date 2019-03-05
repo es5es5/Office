@@ -14,6 +14,7 @@ export default new Router({
     {
       path: '/',
       name: 'main',
+      redirect: '/workspace',
       component: MainLayout,
       children: [
         ...WorkspaceRoutes

@@ -45,6 +45,9 @@
           </sui-form>
         </sui-modal-content>
         <sui-modal-actions>
+          <sui-button @click="deleteItem">
+            삭제
+          </sui-button>
           <sui-button @click="updateItem">
             수정
           </sui-button>
@@ -167,6 +170,14 @@ export default {
       this.gridItems.filter(item => {
         if (item.i === this.selectedItem.i) {
           item = this.selectedItem
+        }
+      })
+      this.modalInit = false
+    },
+    deleteItem () {
+      this.gridItems.filter((item, index) => {
+        if (item.i === this.selectedItem.i) {
+          this.gridItems.splice(index, 1)
         }
       })
       this.modalInit = false
