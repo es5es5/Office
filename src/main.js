@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import './plugins/axios'
 import './plugins/animante-css'
+import './plugins/hover-css'
 import './plugins/element'
 import './plugins/grid-layout'
 import './plugins/semantic-ui-vue'

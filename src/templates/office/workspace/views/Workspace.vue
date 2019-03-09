@@ -11,11 +11,11 @@
         :is-resizable="true"
         :is-mirrored="false"
         :vertical-compact="false"
-        :margin="[5, 5]"
+        :margin="[10, 10]"
         :use-css-transforms="false"
         >
         <div class="item_wrap" v-for="item in gridItems" :key="item.i">
-          <grid-item :class="item.color" style="text-align: center;"
+          <grid-item :class="item.color" class="hvr-buzz-out" style="text-align: center;"
             :x="item.x"
             :y="item.y"
             :w="item.w"
@@ -228,4 +228,17 @@ export default {
 
 <style lang="scss" scoped>
 
+.hvr-buzz-out:hover,
+.hvr-buzz-out:focus,
+.hvr-buzz-out:active {transform: scale(1);}
+.hvr-buzz-out {
+    display: inline-block;
+    vertical-align: middle;
+    transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    transition-duration: 5s;
+    transition-property: transition;
+}
 </style>
