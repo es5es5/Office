@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import MainLayout from '@/components/MainLayout'
-
 import WorkspaceRoutes from '@/templates/office/workspace/routes'
 
 Vue.use(Router)
@@ -13,9 +11,15 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'main',
-      redirect: '/workspace',
-      component: MainLayout,
+      name: 'Home',
+      component: () => import('./components/Home')
+    },
+    {
+      path: '/main',
+      name: 'Main',
+      // redirect: '/workspace',
+      // redirect: '/workspace2',
+      component: () => import('./components/MainLayout'),
       children: [
         ...WorkspaceRoutes
       ]
